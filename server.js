@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 import router from "./routes/user-routes.js";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
+import dotenv from "dotenv";
 
+dotenv.config()
 const app = express();
 app.use(cors())
 app.use(cookieParser());
@@ -11,7 +13,7 @@ app.use(express.json());
 app.use('/api',router)
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb+srv://suryaimmadisetty5252:CKzJbPBeztCAwmEU@cluster0.l9oi4dw.mongodb.net/').then(()=>{
+mongoose.connect(process.env.mongoURL).then(()=>{
     app.listen(PORT);
     console.log('database is connected');
 }).catch((err)=> console.log(err));

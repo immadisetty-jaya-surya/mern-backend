@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET_KEY = 'my-secret-key'
-const resend = new Resend('re_Z7aZJzzu_CgWWbeNbwHJF87rM72pACfY7');
+const resend = new Resend(process.env.resend);
 
 const generateOTP = () => {
     // Generate a random 8-digit OTP
