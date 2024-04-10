@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/api',router)
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb+srv://suryaimmadisetty5252:CKzJbPBeztCAwmEU@cluster0.l9oi4dw.mongodb.net/').then(()=>{
+mongoose.connect('').then(()=>{
     app.listen(PORT);
     console.log('database is connected');
 }).catch((err)=> console.log(err));
