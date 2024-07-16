@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import User from '../model/User.js'
+import User from '../model/User'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto'
@@ -104,7 +104,7 @@ const verifyToken = async(req,res,next)=>{
     const token = authHeader?.split(' ')[1]
     // console.log(token);
 
-    // const headers = req.headers[`authorization`]
+    // const headers = req.headers[authorization]
     // console.log(headers);
     // const token = headers.split(" ")[1];
     if (!token) {
