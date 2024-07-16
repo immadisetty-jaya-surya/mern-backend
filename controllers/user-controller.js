@@ -114,7 +114,7 @@ const verifyToken = async(req,res,next)=>{
         if (err) {
             // return res.status(400).json({message:"invalid token"})
             // return res.status(403).send({ message: 'Failed to authenticate token' });
-            return res.status(500).send({ message: 'Failed to authenticate token' });
+            return res.status(500).send({ message: 'Ffailed to authenticate token' });
         }
         // console.log(user.id);
         req.id = user.id;
