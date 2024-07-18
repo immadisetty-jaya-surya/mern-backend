@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import User from '../model/User'
+import User from '../model/User.js'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto'
@@ -8,8 +8,9 @@ import crypto from 'crypto'
 const secretKey = crypto.randomBytes(64).toString('hex');
 console.log(secretKey);
 
-const JWT_SECRET_KEY = secretKey
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 console.log(JWT_SECRET_KEY);
+
 const resend = new Resend('re_Z7aZJzzu_CNgWWbeNbwHJF87rM72pACfY7');
 
 const generateOTP = () => {
@@ -89,7 +90,7 @@ const Login = async(req,res,next)=>{
 
     res.cookie(String(existingUser._id),token,{
         path:'/',
-        expires: new Date(Date.now() + 1000*30),
+        expires: new Date(Date.now() + 1000*60*60),
         httpOnly:true,
         sameSite: 'lax'
     })
@@ -103,15 +104,15 @@ const verifyToken = async(req,res,next)=>{
     // const token = cookies.split("=")[1];
     const token = authHeader?.split(' ')[1]
     // console.log(token);
-
     // const headers = req.headers[authorization]
     // console.log(headers);
     // const token = headers.split(" ")[1];
     if (!token) {
-        res.status(403).json({message:'no token provided'})
+        res.status(403).json({message:'no token providedd'})
     }
-    jwt.verify(token,JWT_SECRET_KEY,(err,user)=>{
+    jwt.verify(token,process.env.JWT_SECRET_KEY,(err,user)=>{
         if (err) {
+            console.error('Token verification error:', err); 
             // return res.status(400).json({message:"invalid token"})
             // return res.status(403).send({ message: 'Failed to authenticate token' });
             return res.status(500).send({ message: 'Ffailed to authenticate token' });

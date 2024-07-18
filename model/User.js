@@ -20,9 +20,13 @@ const userSchema = new mongoose.Schema({
         default:false
     },
     verificationCode:{
-        type: String
+        type: String,
+        default: null
+    },
+    selectedCategories:{
+        type: [String],
+        default:[]
     }
 })
 
-module.exports = mongoose.model('User',userSchema);
-
+export default mongoose.model('User',userSchema);
