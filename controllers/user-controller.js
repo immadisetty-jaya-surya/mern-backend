@@ -8,7 +8,7 @@ import crypto from 'crypto'
 const secretKey = crypto.randomBytes(64).toString('hex');
 console.log(secretKey);
 
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
+const JWT_SECRET_KEY = secretKey
 console.log(JWT_SECRET_KEY);
 
 const resend = new Resend('re_Z7aZJzzu_CNgWWbeNbwHJF87rM72pACfY7');
@@ -86,7 +86,7 @@ const Login = async(req,res,next)=>{
     if(!isPasswordCorrect){
         return res.status(400).json({message:'Invalid email and password '});
     }
-    const token = jwt.sign({id: existingUser._id},JWT_SECRET_KEY,{expiresIn:'36000s'});
+    const token = jwt.sign({id: existingUser._id},process.env.JWT_SECRET_KEY,{expiresIn:'36000s'});
 
     res.cookie(String(existingUser._id),token,{
         path:'/',
