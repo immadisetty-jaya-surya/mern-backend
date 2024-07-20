@@ -16,6 +16,7 @@ const getCategories = async (req,res) => {
 
 const getSelectedCategories = async (req,res) => {
   const userId  =req.id;
+  console.log("hi?")
   try {
     const user = await User.findById(userId);
     res.json({ selectedCategories: user.selectedCategories})
