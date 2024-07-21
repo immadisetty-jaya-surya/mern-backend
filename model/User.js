@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         default: null
     },
     selectedCategories:{
-        type: [String],
+        type: String,
         default:[]
     }
 })

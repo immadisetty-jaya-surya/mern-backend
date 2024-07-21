@@ -1,8 +1,17 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv'
 import {faker} from'@faker-js/faker'
 import Category from "../model/Category.js";
 
-mongoose.connect('mongodb+srv://suryaimmadisetty5252:CKzJbPBeztCAwmEU@cluster0.l9oi4dw.mongodb.net/')
+dotenv.config();
+
+const mongoUri = process.env.MONGODB_URL;
+if (!mongoUri) {
+  console.error('MongoDB connection string is missing. Please check your .env file.');
+  process.exit(1);
+}
+
+mongoose.connect(mongoUri)
   .then(() => {
     console.log('connected to mongoDB');
     generateCategories();

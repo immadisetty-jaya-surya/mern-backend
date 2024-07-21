@@ -11,7 +11,7 @@ router.get('/user', verifyToken, getUser);
 //categories
 router.get('/categories', getCategories);
 router.get('/selectedCategories', verifyToken, getSelectedCategories);
-router.get('/updateSelectedCategories', verifyToken, updateSelectedCategories);
+router.post('/updateSelectedCategories', verifyToken, updateSelectedCategories);
 
 // module.exports = router
 export default router

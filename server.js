@@ -10,7 +10,18 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = ['http://localhost:5173'];
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+        },
+        credentials: true
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api', userRouter);
@@ -33,12 +44,7 @@ app.get('/api/verifyToken', (req, res) => {
     })
 })
 
-/* mongoose.connect('mongodb+srv://suryaimmadisetty5252:CKzJbPBeztCAwmEU@cluster0.l9oi4dw.mongodb.net/').then(()=>{
-    app.listen(PORT);
-    console.log('database is connected');
-}).catch((err)=> console.log(err)); */
-
-mongoose.connect('mongodb+srv://suryaimmadisetty5252:CKzJbPBeztCAwmEU@cluster0.l9oi4dw.mongodb.net/')
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
         console.log('database is connected');
         app.listen(PORT, () => {

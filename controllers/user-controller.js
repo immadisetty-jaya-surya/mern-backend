@@ -3,22 +3,12 @@ import User from '../model/User.js'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-<<<<<<< HEAD
-// let crypto = require('crypto');
-const secretKey = crypto.randomBytes(64).toString('hex');
-console.log(secretKey);
-
-const JWT_SECRET_KEY = secretKey
-console.log(JWT_SECRET_KEY);
-=======
->>>>>>> 1cf29e65ee38b3299ce37433e2c98fbc5758c671
-
 const resend = new Resend('re_Z7aZJzzu_CNgWWbeNbwHJF87rM72pACfY7');
 
 const generateOTP = () => {
     // Generate a random 8-digit OTP
     const otp = Math.floor(10000000 + Math.random() * 90000000);
-    console.log(otp.toString())
+    console.log('otp - ',otp.toString())
     return otp.toString();
 }
 
@@ -88,11 +78,7 @@ const Login = async (req, res, next) => {
     if (!isPasswordCorrect) {
         return res.status(400).json({ message: 'Invalid email and password ' });
     }
-<<<<<<< HEAD
     const token = jwt.sign({id: existingUser._id},process.env.JWT_SECRET_KEY,{expiresIn:'36000s'});
-=======
-    const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '36000s' });
->>>>>>> 1cf29e65ee38b3299ce37433e2c98fbc5758c671
 
     res.cookie(String(existingUser._id), token, {
         path: '/',
